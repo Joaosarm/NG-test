@@ -1,7 +1,7 @@
 import * as transactionsRepository from "../repositories/transactionsRepository.js";
 import * as transactionsUtils from "../utils/transactionsUtils.js";
 
-export async function getTransactions(id: number){
+export async function getAllTransactions(id: number){
     const transactions = await transactionsRepository.getAllTransactions(id);
     return transactions;
 }
@@ -14,4 +14,14 @@ export async function newTransaction(debitedAccountId: number, creditedAccount: 
     await transactionsRepository.insert(debitedAccountId, creditedAccountId, value);
 
     await transactionsUtils.updateAccounts(debitedAccountId, creditedAccountId, value);
+}
+
+export async function getDebitedTransactions(id: number){
+    const debitedTransactions = await transactionsRepository.getDebitedTransactions(id);
+    return debitedTransactions;
+}
+
+export async function getCreditedTransactions(id: number){
+    const creditedTransactions = await transactionsRepository.getCreditedTransactions(id);
+    return creditedTransactions;
 }
