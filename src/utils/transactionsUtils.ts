@@ -1,7 +1,7 @@
-import * as transactionsRepository from "../repositories/transactionsRepository.js"
+import * as accountRepository from "../repositories/accountRepository.js";
 
 export async function CheckBalance(id: number, value: number) {
-    const {accounts} = await transactionsRepository.getBalance(id);
+    const {accounts} = await accountRepository.getBalance(id);
     if (accounts.balance < value) {
         throw {
         type: "Invalid requisition",
@@ -12,7 +12,7 @@ export async function CheckBalance(id: number, value: number) {
   }
 
   export async function GetUserAccountId(username: string) {
-    const exists = await transactionsRepository.getUserAccountId(username);
+    const exists = await accountRepository.getUserAccountId(username);
     if (!exists) {
         throw {
             type: "Invalid requisition",
@@ -35,6 +35,6 @@ export async function CheckBalance(id: number, value: number) {
   }
   
   export async function updateAccounts(debitedAccountId: number, creditedAccountId: number, value: number) {
-    await transactionsRepository.updateAccount(debitedAccountId, -value);
-    await transactionsRepository.updateAccount(creditedAccountId, value);
+    await accountRepository.updateAccount(debitedAccountId, -value);
+    await accountRepository.updateAccount(creditedAccountId, value);
   }
