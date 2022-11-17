@@ -12,15 +12,15 @@ export async function CheckBalance(id: number, value: number) {
   }
 
   export async function GetUserAccountId(username: string) {
-    const {accounts} = await transactionsRepository.getUserAccountId(username);
-    if (accounts.id) {
-      return accounts.id;
-    } else{
+    const exists = await transactionsRepository.getUserAccountId(username);
+    if (!exists) {
         throw {
-        type: "Invalid requisition",
-        message: "Username does not exist",
-        status: 409
-      }
+            type: "Invalid requisition",
+            message: "Username does not exist",
+            status: 409
+          }
+    } else{
+        return exists.accounts.id;
     }
   }
   
