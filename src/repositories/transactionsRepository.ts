@@ -13,6 +13,30 @@ export async function getAllTransactions(id: number) {
                 { creditedAccountId: id }
             ]
         },
+        select: {
+            debitedAccountId: true,
+            creditedAccountId: true,
+            value: true,
+            createdAt: true,
+            accounts_accountsTotransactions_creditedAccountId:{
+                select:{
+                    users:{
+                        select:{
+                            username: true
+                        }
+                    }
+                }
+            },
+            accounts_accountsTotransactions_debitedAccountId:{
+                select:{
+                    users:{
+                        select:{
+                            username: true
+                        }
+                    }
+                }
+            }
+        },
     });
     return userTransactions;
 }
@@ -25,6 +49,24 @@ export async function getDebitedTransactions(id: number) {
             creditedAccountId: true,
             value: true,
             createdAt: true,
+            accounts_accountsTotransactions_creditedAccountId:{
+                select:{
+                    users:{
+                        select:{
+                            username: true
+                        }
+                    }
+                }
+            },
+            accounts_accountsTotransactions_debitedAccountId:{
+                select:{
+                    users:{
+                        select:{
+                            username: true
+                        }
+                    }
+                }
+            }
         },
     });
     return userDebitedTransactions;
@@ -38,6 +80,24 @@ export async function getCreditedTransactions(id: number) {
             creditedAccountId: true,
             value: true,
             createdAt: true,
+            accounts_accountsTotransactions_creditedAccountId:{
+                select:{
+                    users:{
+                        select:{
+                            username: true
+                        }
+                    }
+                }
+            },
+            accounts_accountsTotransactions_debitedAccountId:{
+                select:{
+                    users:{
+                        select:{
+                            username: true
+                        }
+                    }
+                }
+            }
         },
     });
     return userCreditedTransactions;
