@@ -18,6 +18,6 @@ export async function signIn(userData : CreateUserData){
     const user = await authUtils.getUser(username);
     await authUtils.checkPassword(password, user.password);
     const {id} = user;
-    const token = jwt.sign(`${id}`, process.env.JWT_SECRET as string, { expiresIn: '24h' });
+    const token = jwt.sign({id}, process.env.JWT_SECRET as string, { expiresIn: '24h'});
     return {token, username, id};
 }
