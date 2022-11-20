@@ -17,6 +17,7 @@ export async function signIn(userData : CreateUserData){
     const {username, password} = userData;
     const user = await authUtils.getUser(username);
     await authUtils.checkPassword(password, user.password);
-    const token = jwt.sign(`${user.id}`, process.env.JWT_SECRET as string);
-    return {token, username};
+    const {id} = user;
+    const token = jwt.sign(`${id}`, process.env.JWT_SECRET as string);
+    return {token, username, id};
 }

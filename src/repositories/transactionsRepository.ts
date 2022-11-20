@@ -13,12 +13,6 @@ export async function getAllTransactions(id: number) {
                 { creditedAccountId: id }
             ]
         },
-        select: {
-            debitedAccountId: true,
-            creditedAccountId: true,
-            value: true,
-            createdAt: true,
-        },
     });
     return userTransactions;
 }
